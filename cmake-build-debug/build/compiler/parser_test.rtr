@@ -1,5 +1,18 @@
-var A LinkedList =;
-var B Iterator = A InsertAfter (32+ 45* 4534 - 43634 == 3);
-var C Iterator = A Get (B Get D Get E);
+var A LinkedList = 0;
+var tail Iterator = A InsertAfter(False);
+var front Iterator = A InsertBefore(True);
 
-var M Bool = (A Get B Get V) IsValid && True;
+var middle Iterator = A InsertAfter(front (0));
+middle = A InsertAfter(front (1));
+middle = A InsertAfter(front (2));
+
+
+
+var Q Iterator =  A InsertAfter(tail (1488));
+var Z Iterator =  A InsertAfter(middle (1488));
+var ZZ Iterator = A InsertAfter(front (1488));
+
+var F Iterator = A InsertBefore(front (1337));
+F = A InsertBefore(tail (135555555555555555555555555537));
+
+tail = A Erase tail;

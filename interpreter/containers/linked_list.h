@@ -53,7 +53,7 @@ namespace bicycle {
 
         template<typename Callback>
         void TravelWithCallback(Callback callback) const {
-            Node<ValueType> *curr = front_;
+            Node <ValueType>* curr = front_;
             while (curr) {
                 Node<ValueType> *next = curr->next;
                 callback(curr);
@@ -112,6 +112,9 @@ namespace bicycle {
         }
 
         Node<ValueType> *InsertAfter(Node<ValueType> *after_this, const ValueType &value) {
+            if (after_this == tail_ || size_ == 1) {
+                return PushBack(value);
+            }
             auto new_node = ConstructNode(value);
             new_node->next = after_this->next;
             new_node->prev = after_this;
@@ -120,19 +123,28 @@ namespace bicycle {
             if (after_this == tail_) {
                 tail_ = new_node;
             }
+
             return new_node;
         }
 
         Node<ValueType> *InsertBefore(Node<ValueType> *before_this, const ValueType &value) {
-            auto new_node = ConstructNode(value);
+            if (before_this == front_ || size_ == 1) {
+                return PushFront(value);
+            }
 
+            auto new_node = ConstructNode(value);
             new_node->prev = before_this->prev;
             new_node->next = before_this;
+
+            before_this->prev->next = new_node;
             before_this->prev = new_node;
-            size_++;
+
+
+
             if (before_this == front_) {
                 front_ = new_node;
             }
+            size_++;
 
             return new_node;
         }
