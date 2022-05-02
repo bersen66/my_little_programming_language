@@ -1,31 +1,43 @@
 Терминалы:
 
-IDENTIFIER        = [a-zA-Z_]+
-STRING_CONSTANT   = "(\\.|[^\\"])*"
-NUMBER_CONSTANT   = [-]?\d+
-OPEN_PARENTHESIS  = (
-CLOSE_PARENTHESIS = )
+IDENTIFIER              = [a-zA-Z_]+
+STRING_CONSTANT         = "(\\.|[^\\"])*"
+NUMBER_CONSTANT         = [-]?\d+
+OPEN_PARENTHESIS        = (
+CLOSE_PARENTHESIS       = )
 
-ADD_OPERATOR      = +
-SUB_OPERATOR      = -
-MUL_OPERATOR      = *
-DIV_OPERATOR      = /
+ADD_OPERATOR            = +
+SUB_OPERATOR            = -
+MUL_OPERATOR            = *
+DIV_OPERATOR            = /
 
-LT_OPERATOR       = <
-LTOE_OPERATOR     = <=
-GT_OPERATOR       = >
-GTOE_OPERATOR     = >=
-EQ_OPERATOR       = ==
-NEQ_OPERATOR      = !=
+LT_OPERATOR             = <
+LTOE_OPERATOR           = <=
+GT_OPERATOR             = >
+GTOE_OPERATOR           = >=
+EQ_OPERATOR             = ==
+NEQ_OPERATOR            = !=
 
-AND_OPERATOR      = &&
-OR_OPERATOR       = ||
+AND_OPERATOR            = &&
+OR_OPERATOR             = ||
 
 
-VAR_KEYW          = var
-INT_KEYW          = Int
-BOOL_KEYW         = Bool
-SEMICOLON         = ;
+GET_OPERATOR            = Get
+IS_VALID_OPERATOR       = IsValid
+HAS_NEXT_OPERATOR       = HasNext
+HAS_PREV_OPERATOR       = HasPrev
+INSERT_AFTER_OPERATOR   = InsertAfter
+INSERT_BEFORE_OPERATOR  = InsertBefore
+ERASE_OPERATOR          = Erase
+
+VAR_KEYW                = var
+
+INT_KEYW                = Int
+BOOL_KEYW               = Bool
+BASIC_LINKED_LIST       = LinkedList
+BASIC_ITERATOR          = Iterator
+
+SEMICOLON               = ;
 
 ===================================================================================================
 
@@ -62,6 +74,8 @@ var_decl    -> VAR_KEYW IDENTIFIER type
 
 type        -> INT_KEYW
                | BOOL_KEYW
+               | LINKED_LIST
+               | ITERATOR
                ;
 
 op          -> +
@@ -74,6 +88,13 @@ op          -> +
                | >=
                | <=
                | <
+               | Get
+               | IsValid        // только для итераторов
+               | HasNext        // только для итераторов
+               | HasPrev        // только для итераторов
+               | InsertAfter
+               | InsertBefore
+               | Erase
                ;
 
 

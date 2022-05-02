@@ -30,11 +30,19 @@ struct Instruction {
         EQ,
         NEQ,
         PUSH,
+
+        GET,
+        ISVAL,
+        HSNXT,
+        HSPRV,
+        INSA,
+        INSB,
+        ERS,
     };
 
     Instruction(Type t) : type(t) {}
 
-    virtual void ParseFrom(std::string_view& input) = 0;
+    virtual void ParseFrom(std::string_view &input) = 0;
 
     virtual void Process(VirtualMachine &vm) = 0;
 
@@ -45,23 +53,31 @@ struct Instruction {
 
 
 const std::unordered_map<std::string_view, Instruction::Type> STRING_TO_INSTRUCTION = {
-        {"ADD", Instruction::Type::ADD},
-        {"ASN", Instruction::Type::ASN},
-        {"DIV", Instruction::Type::DIV},
-        {"MUL", Instruction::Type::MUL},
-        {"SUB", Instruction::Type::SUB},
+        {"ADD",   Instruction::Type::ADD},
+        {"ASN",   Instruction::Type::ASN},
+        {"DIV",   Instruction::Type::DIV},
+        {"MUL",   Instruction::Type::MUL},
+        {"SUB",   Instruction::Type::SUB},
 
-        {"LT", Instruction::Type::LT},
-        {"GT", Instruction::Type::GT},
-        {"LTOE", Instruction::Type::LTOE},
-        {"GTOE", Instruction::Type::GTOE},
-        {"OR", Instruction::Type::OR},
-        {"AND", Instruction::Type::AND},
-        {"EQ", Instruction::Type::EQ},
-        {"NEQ", Instruction::Type::NEQ},
+        {"LT",    Instruction::Type::LT},
+        {"GT",    Instruction::Type::GT},
+        {"LTOE",  Instruction::Type::LTOE},
+        {"GTOE",  Instruction::Type::GTOE},
+        {"OR",    Instruction::Type::OR},
+        {"AND",   Instruction::Type::AND},
+        {"EQ",    Instruction::Type::EQ},
+        {"NEQ",   Instruction::Type::NEQ},
 
-        {"CRT", Instruction::Type::CRT},
-        {"PUSH", Instruction::Type::PUSH},
+        {"CRT",   Instruction::Type::CRT},
+        {"PUSH",  Instruction::Type::PUSH},
+
+        {"GET",   Instruction::Type::GET},
+        {"ISVAL", Instruction::Type::ISVAL},
+        {"HSNXT", Instruction::Type::HSNXT},
+        {"HSPRV", Instruction::Type::HSPRV},
+        {"INSA",  Instruction::Type::INSA},
+        {"INSB",  Instruction::Type::INSB},
+        {"ERS",   Instruction::Type::ERS},
 };
 
 struct AddInstruction : public Instruction {
@@ -74,7 +90,7 @@ struct AddInstruction : public Instruction {
     }
 
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 
@@ -89,7 +105,7 @@ struct SubInstruction : public Instruction {
         vm.Push(lhs - rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -103,7 +119,7 @@ struct MulInstruction : public Instruction {
         vm.Push(lhs * rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -117,7 +133,7 @@ struct DivInstruction : public Instruction {
         vm.Push(lhs / rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -131,7 +147,7 @@ struct LTInstruction : public Instruction {
         vm.Push(lhs < rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -145,7 +161,7 @@ struct GTInstruction : public Instruction {
         vm.Push(lhs > rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -159,11 +175,10 @@ struct GTOEInstruction : public Instruction {
         vm.Push(lhs >= rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
-
 
 struct LTOEInstruction : public Instruction {
     LTOEInstruction() : Instruction(Type::LTOE) {}
@@ -174,7 +189,7 @@ struct LTOEInstruction : public Instruction {
         vm.Push(lhs <= rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -188,7 +203,7 @@ struct ORInstruction : public Instruction {
         vm.Push(OR(lhs, rhs));
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -202,7 +217,7 @@ struct ANDInstruction : public Instruction {
         vm.Push(AND(lhs, rhs));
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -216,7 +231,7 @@ struct EQInstruction : public Instruction {
         vm.Push(lhs == rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -230,7 +245,114 @@ struct NEQInstruction : public Instruction {
         vm.Push(lhs != rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+
+struct GETInstruction : public Instruction {
+    GETInstruction() : Instruction(Type::GET) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &iterator = vm.Top();
+        vm.Push(GET(iterator));
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct ISVALInstruction : public Instruction {
+    ISVALInstruction() : Instruction(Type::ISVAL) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &iterator = vm.Top();
+        vm.Push(ISVAL(iterator));
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct HSNXTInstruction : public Instruction {
+    HSNXTInstruction() : Instruction(Type::HSNXT) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &iterator = vm.Top();
+        vm.Push(HSNXT(iterator));
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct HSPRVInstruction : public Instruction {
+    HSPRVInstruction() : Instruction(Type::HSPRV) {}
+
+    void Process(VirtualMachine &vm) override {
+        const auto &iterator = vm.Top();
+        vm.Push(HSPRV(iterator));
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct INSAInstruction : public Instruction {
+    INSAInstruction() : Instruction(Type::INSA) {}
+
+    void Process(VirtualMachine &vm) override {
+        auto value = vm.Top();
+        auto second_token = vm.Top();
+
+        if (second_token->type == Obj::Type::BASIC_ITERATOR) {
+            ObjPtr container = vm.Top();
+            vm.Push(INSA(container, second_token, value));
+        } else if (second_token->type == Obj::Type::BASIC_LINKED_LIST){
+            vm.Push(INSA(second_token, value));
+        }
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct INSBInstruction : public Instruction {
+    INSBInstruction() : Instruction(Type::INSB) {}
+
+    void Process(VirtualMachine &vm) override {
+        auto value = vm.Top();
+        auto second_token = vm.Top();
+
+        if (second_token->type == Obj::Type::BASIC_ITERATOR) {
+            auto container = vm.Top();
+            vm.Push(INSB(container, second_token, value));
+        } else if (second_token->type == Obj::Type::BASIC_LINKED_LIST){
+            vm.Push(INSB(second_token, value));
+        }
+    }
+
+    void ParseFrom(std::string_view &input) override {
+        return;
+    }
+};
+
+struct ERSInstruction : public Instruction {
+    ERSInstruction() : Instruction(Type::ERS) {}
+
+    void Process(VirtualMachine &vm) override {
+        auto iterator = vm.Top();
+        auto container = vm.Top();
+        vm.Push(ERS(container, iterator));
+    }
+
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -246,7 +368,7 @@ struct CrtInstruction : public Instruction {
         );
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         name = ReadToken(input);
         type = ReadToken(input);
     }
@@ -265,8 +387,8 @@ struct PushInstruction : public Instruction {
             switch (obj_type) {
                 case Obj::Type::BASIC_INT: {
                     ObjPtr result = std::make_shared<Int>(
-                           // std::atoi(second_token.c_str())
-                           second_token
+                            // std::atoi(second_token.c_str())
+                            second_token
                     );
 
                     vm.Push(result);
@@ -287,7 +409,7 @@ struct PushInstruction : public Instruction {
         }
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         first_token = ReadToken(input);
         second_token = ReadToken(input);
     }
@@ -306,7 +428,7 @@ struct AsnInstruction : public Instruction {
         lhs->Assign(rhs);
     }
 
-    void ParseFrom(std::string_view& input) override {
+    void ParseFrom(std::string_view &input) override {
         return;
     }
 };
@@ -315,70 +437,119 @@ InstructionHolder MakeInstruction(Instruction::Type type) {
     switch (type) {
         case Instruction::Type::DIV: {
             return std::make_unique<DivInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::MUL: {
             return std::make_unique<MulInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::ADD: {
             return std::make_unique<AddInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::SUB: {
             return std::make_unique<SubInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::ASN: {
             return std::make_unique<AsnInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::LT: {
             return std::make_unique<LTInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::LTOE: {
             return std::make_unique<LTOEInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::GT: {
             return std::make_unique<GTInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::GTOE: {
             return std::make_unique<GTOEInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::OR: {
             return std::make_unique<ORInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::AND: {
             return std::make_unique<ANDInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::EQ: {
             return std::make_unique<EQInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::NEQ: {
             return std::make_unique<NEQInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::PUSH: {
             return std::make_unique<PushInstruction>();
-        } break;
+        }
+            break;
 
         case Instruction::Type::CRT: {
             return std::make_unique<CrtInstruction>();
-        } break;
+        }
+            break;
+
+        case Instruction::Type::ERS: {
+            return std::make_unique<ERSInstruction>();
+        }
+            break;
+
+        case Instruction::Type::GET: {
+            return std::make_unique<GETInstruction>();
+        }
+            break;
+
+        case Instruction::Type::HSNXT: {
+            return std::make_unique<HSNXTInstruction>();
+        }
+            break;
+
+        case Instruction::Type::HSPRV: {
+            return std::make_unique<HSPRVInstruction>();
+        }
+            break;
+
+        case Instruction::Type::INSA: {
+            return std::make_unique<INSAInstruction>();
+        }
+            break;
+
+        case Instruction::Type::INSB: {
+            return std::make_unique<INSBInstruction>();
+        }
+            break;
+
+        case Instruction::Type::ISVAL: {
+            return std::make_unique<ISVALInstruction>();
+        }
+            break;
     }
     throw std::runtime_error("NOT IMPLEMENTED INSTRUCTION");
 }
 
 
-
-std::vector<InstructionHolder> ReadInstructions(std::istream& in = std::cin) {
+std::vector<InstructionHolder> ReadInstructions(std::istream &in = std::cin) {
     std::vector<InstructionHolder> result;
 
     for (std::string command; getline(in, command);) {
@@ -392,9 +563,8 @@ std::vector<InstructionHolder> ReadInstructions(std::istream& in = std::cin) {
     return result;
 }
 
-
-void ProcessInstructions(std::vector<InstructionHolder>&& instructions, VirtualMachine& vm) {
-    for (auto& instr : instructions) {
+void ProcessInstructions(std::vector<InstructionHolder> &&instructions, VirtualMachine &vm) {
+    for (auto &instr: instructions) {
         instr->Process(vm);
     }
 }

@@ -1,3 +1,18 @@
-var B Bool = True && False || 2 < 4 - 100000000000000000000000000000000;
-var A Bool = B || True;
+var A LinkedList = 0;
+var tail Iterator = A InsertAfter(False);
+var front Iterator = A InsertBefore(True);
 
+var middle Iterator = A InsertAfter(front (0));
+middle = A InsertAfter(front (1));
+middle = A InsertAfter(front (2));
+
+
+
+var Q Iterator =  A InsertAfter(tail (1488));
+var Z Iterator =  A InsertAfter(middle (1488));
+var ZZ Iterator = A InsertAfter(front (1488));
+
+var F Iterator = A InsertBefore(front (1337));
+F = A InsertBefore(tail (135555555555555555555555555537));
+
+tail = A Erase tail;

@@ -50,6 +50,8 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
         return BASIC_DATA_TYPES.at(lexem);
     } else if (IsKeyword(lexem)) {
         return KEYWORDS.at(lexem);
+    } else if (IsOperator(lexem)) {
+        return OPERATORS.at(lexem);
     } else if (IsIdentifier(lexem)) {
         return Token::Type::IDENTIFIER;
     } else if (IsStringConstant(lexem)) {
@@ -62,8 +64,6 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
         return ASSIGN_OPERATOR.at(lexem);
     } else if (IsSeparator(lexem)) {
         return SEPARATORS.at(lexem);
-    } else if (IsOperator(lexem)) {
-        return OPERATORS.at(lexem);
     } else
         return std::nullopt;
 }

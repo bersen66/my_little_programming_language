@@ -23,7 +23,7 @@ set(
         virtual_machine.h
         objects/object.h
         instructions.h
-        containers/hash_set.h objects/integer.h)
+)
 
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 

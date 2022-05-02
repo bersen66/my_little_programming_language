@@ -50,6 +50,34 @@ bool Int::HasANDOperator() const {
     return true;
 }
 
+bool Int::HasGETOperator() const {
+    return false;
+};
+
+bool Int::HasISVALOperator() const {
+    return false;
+};
+
+bool Int::HasHSNXTOperator() const {
+    return false;
+};
+
+bool Int::HasHSPRVOperator() const {
+    return false;
+};
+
+bool Int::HasINSAOperator() const {
+    return false;
+};
+
+bool Int::HasINSBOperator() const {
+    return false;
+};
+
+bool Int::HasERSOperator() const {
+    return false;
+};
+
 std::size_t Int::Hash() const {
     return static_cast<size_t>(value_);
 }
@@ -70,49 +98,86 @@ void Int::Assign(ObjPtr other) {
 bool Bool::HasSUMOperator() const {
     return false;
 }
+
 bool Bool::HasDIVOperator() const {
     return false;
 }
+
 bool Bool::HasMULOperator() const {
     return false;
 }
+
 bool Bool::HasSUBOperator() const {
     return false;
 }
+
 bool Bool::HasLTOperator() const {
     return true;
 }
+
 bool Bool::HasGTOperator() const {
     return true;
 }
+
 bool Bool::HasLTOEOperator() const {
     return true;
 }
+
 bool Bool::HasGTOEOperator() const {
     return true;
 }
+
 bool Bool::HasEQOperator() const {
     return true;
 }
+
 bool Bool::HasNEQOperator() const {
     return true;
 }
+
 bool Bool::HasOROperator() const {
     return true;
 }
+
 bool Bool::HasANDOperator() const {
     return true;
 }
 
+bool Bool::HasGETOperator() const {
+    return false;
+};
+
+bool Bool::HasISVALOperator() const {
+    return false;
+};
+
+bool Bool::HasHSNXTOperator() const {
+    return false;
+};
+
+bool Bool::HasHSPRVOperator() const {
+    return false;
+};
+
+bool Bool::HasINSAOperator() const {
+    return false;
+};
+
+bool Bool::HasINSBOperator() const {
+    return false;
+};
+
+bool Bool::HasERSOperator() const {
+    return false;
+};
 
 std::size_t Bool::Hash() const {
     return std::hash<bool>{}(value_);
 }
 
 std::string Bool::ToString() const {
-     return (value_ ? "True" : "False");
+    return (value_ ? "True" : "False");
 }
-
 
 void Bool::Assign(ObjPtr other) {
     if (type != other->type) {
@@ -122,6 +187,193 @@ void Bool::Assign(ObjPtr other) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool Iterator::HasSUMOperator() const {
+    return false;
+}
+
+bool Iterator::HasDIVOperator() const {
+    return false;
+}
+
+bool Iterator::HasMULOperator() const {
+    return false;
+}
+
+bool Iterator::HasSUBOperator() const {
+    return false;
+}
+
+std::size_t Iterator::Hash() const {
+
+}
+
+bool Iterator::HasLTOperator() const {
+    return false;
+}
+
+bool Iterator::HasGTOperator() const {
+    return false;
+}
+
+bool Iterator::HasLTOEOperator() const {
+    return false;
+}
+
+bool Iterator::HasGTOEOperator() const {
+    return false;
+}
+
+bool Iterator::HasEQOperator() const {
+    return false;
+}
+
+bool Iterator::HasNEQOperator() const {
+    return false;
+}
+
+bool Iterator::HasOROperator() const {
+    return false;
+}
+
+bool Iterator::HasANDOperator() const {
+    return false;
+}
+
+bool Iterator::HasGETOperator() const {
+    return true;
+}
+
+bool Iterator::HasISVALOperator() const {
+    return true;
+}
+
+bool Iterator::HasHSNXTOperator() const {
+    return true;
+}
+
+bool Iterator::HasHSPRVOperator() const {
+    return true;
+}
+
+bool Iterator::HasINSAOperator() const {
+    return true;
+}
+
+bool Iterator::HasINSBOperator() const {
+    return true;
+}
+
+bool Iterator::HasERSOperator() const {
+    return true;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+bool LinkedList::HasSUMOperator() const {
+    return false;
+}
+
+bool LinkedList::HasDIVOperator() const {
+    return false;
+}
+
+bool LinkedList::HasMULOperator() const {
+    return false;
+}
+
+bool LinkedList::HasSUBOperator() const {
+    return false;
+}
+
+
+bool LinkedList::HasLTOperator() const {
+    return false;
+}
+
+bool LinkedList::HasGTOperator() const {
+    return false;
+}
+
+bool LinkedList::HasLTOEOperator() const {
+    return false;
+}
+
+bool LinkedList::HasGTOEOperator() const {
+    return false;
+}
+
+bool LinkedList::HasEQOperator() const {
+    return false;
+}
+
+bool LinkedList::HasNEQOperator() const {
+    return false;
+}
+
+bool LinkedList::HasOROperator() const {
+    return false;
+}
+
+bool LinkedList::HasANDOperator() const {
+    return false;
+}
+
+bool LinkedList::HasGETOperator() const {
+    return true;
+}
+
+bool LinkedList::HasISVALOperator() const {
+    return true;
+}
+
+bool LinkedList::HasHSNXTOperator() const {
+    return true;
+}
+
+bool LinkedList::HasHSPRVOperator() const {
+    return true;
+}
+
+bool LinkedList::HasINSAOperator() const {
+    return true;
+}
+
+bool LinkedList::HasINSBOperator() const {
+    return true;
+}
+
+bool LinkedList::HasERSOperator() const {
+    return true;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+ObjPtr MakeObj(Obj::Type type) {
+    switch (type) {
+        case Obj::Type::BASIC_INT: {
+            return std::make_shared<Int>(0);
+        }
+            break;
+        case Obj::Type::BASIC_BOOL : {
+            return std::make_shared<Bool>(false);
+        }
+            break;
+
+        case Obj::Type::BASIC_LINKED_LIST: {
+            return std::make_shared<LinkedList>();
+        }
+        break;
+
+        case Obj::Type::BASIC_ITERATOR: {
+            return std::make_shared<Iterator>();
+        }
+            break;
+
+    }
+}
 
 std::ostream &operator<<(std::ostream &out, const ObjPtr &value) {
     out << value->ToString();
@@ -227,6 +479,7 @@ ObjPtr operator/(const ObjPtr &lhs, const ObjPtr &rhs) {
         }
     }
 }
+
 
 ObjPtr operator<(const ObjPtr &lhs, const ObjPtr &rhs) {
     if (lhs->type != rhs->type) {
@@ -484,17 +737,171 @@ ObjPtr OR(const ObjPtr &lhs, const ObjPtr &rhs) {
     }
 }
 
-ObjPtr MakeObj(Obj::Type type) {
-    switch (type) {
-        case Obj::Type::BASIC_INT: {
-            return std::make_shared<Int>(0);
-        }
-            break;
-        case Obj::Type::BASIC_BOOL : {
-            return std::make_shared<Bool>(false);
-        }
-            break;
 
+ObjPtr GET(const ObjPtr &iterator) {
 
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Value is not an iterator");
     }
+
+    const auto &iter = std::dynamic_pointer_cast<Iterator>(iterator);
+    if (iter->IsValid()) {
+        return iter->GetNode()->value;
+    }
+
+    throw std::runtime_error("Can't get value from invalid iterator");
+
 }
+
+ObjPtr ISVAL(const ObjPtr &iterator) {
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Value is not an iterator");
+    }
+
+    auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
+    return std::make_shared<Bool>(iter->IsValid());
+
+}
+
+ObjPtr HSNXT(const ObjPtr &iterator) {
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Value is not an iterator");
+    }
+
+    if (!iterator->HasHSNXTOperator()) {
+        throw std::runtime_error("Value doesn't support HasNext operator");
+    }
+
+    const auto &iter = std::dynamic_pointer_cast<Iterator>(iterator);
+    if (iter->IsValid()) {
+        return std::make_shared<Bool>(iter->HasNext());
+    }
+
+    return std::make_shared<Bool>(false);
+}
+
+ObjPtr HSPRV(const ObjPtr &iterator) {
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Value is not an iterator");
+    }
+
+    if (!iterator->HasHSPRVOperator()) {
+        throw std::runtime_error("Value doesn't support HasPrev operator");
+    }
+
+    const auto &iter = std::dynamic_pointer_cast<Iterator>(iterator);
+    if (iter->IsValid()) {
+        return std::make_shared<Bool>(iter->HasPrev());
+    }
+
+    return std::make_shared<Bool>(false);
+}
+
+ObjPtr INSA(ObjPtr &container, ObjPtr &value) {
+
+    if (container->type != Obj::Type::BASIC_LINKED_LIST) {
+        throw std::runtime_error("Expected container");
+    }
+
+    if (!container->HasINSAOperator()) {
+        throw std::runtime_error("Container doesn't support InsertAfter operation");
+    }
+
+    auto cont = std::dynamic_pointer_cast<LinkedList>(container);
+
+    return cont->PushBack(value);
+
+}
+
+ObjPtr INSA(ObjPtr &container, ObjPtr &iterator, ObjPtr &value) {
+    if (container->type != Obj::Type::BASIC_LINKED_LIST) {
+        throw std::runtime_error("Expected container");
+    }
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Expected iterator");
+    }
+
+    if (!container->HasINSAOperator()) {
+        throw std::runtime_error("Container doesn't support InsertAfter operation");
+    }
+
+     auto cont = std::dynamic_pointer_cast<LinkedList>(container);
+     auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
+
+
+    if (!iter->IsValid()) {
+        throw std::runtime_error("expected valid iterator!");
+    }
+
+    return cont->InsertAfter(iterator, value);
+
+}
+
+
+ObjPtr INSB(ObjPtr &container, ObjPtr &value) {
+
+    if (container->type != Obj::Type::BASIC_LINKED_LIST) {
+        throw std::runtime_error("Expected container");
+    }
+
+    if (!container->HasINSBOperator()) {
+        throw std::runtime_error("Container doesn't support InsertBefore operation");
+    }
+
+    auto cont = std::dynamic_pointer_cast<LinkedList>(container);
+
+    return cont->PushFront(value);
+}
+
+ObjPtr INSB(ObjPtr &container, ObjPtr& iterator, ObjPtr &value) {
+    if (container->type != Obj::Type::BASIC_LINKED_LIST) {
+        throw std::runtime_error("Expected container");
+    }
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Expected iterator");
+    }
+
+    if (!container->HasINSBOperator()) {
+        throw std::runtime_error("Container doesn't support InsertBefore operation");
+    }
+
+    auto cont = std::dynamic_pointer_cast<LinkedList>(container);
+    auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
+
+    if (!iter->IsValid()) {
+        throw std::runtime_error("expected valid iterator!");
+    }
+
+    return cont->InsertBefore(iter, value);
+}
+
+
+ObjPtr ERS(ObjPtr &container, const ObjPtr &iterator) {
+    if (container->type != Obj::Type::BASIC_LINKED_LIST) {
+        throw std::runtime_error("Expected container");
+    }
+
+    if (iterator->type != Obj::Type::BASIC_ITERATOR) {
+        throw std::runtime_error("Expected iterator");
+    }
+
+    if (!container->HasERSOperator()) {
+        throw std::runtime_error("Container doesn't support Erase operation");
+    }
+
+    auto cont = std::dynamic_pointer_cast<LinkedList>(container);
+    auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
+
+    if (!iter->IsValid()) {
+        throw std::runtime_error("expected valid iterator!");
+    }
+
+    return cont->Erase(iter);
+}
+
+
