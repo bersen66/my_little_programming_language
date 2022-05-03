@@ -4,10 +4,13 @@
 6	8219	1650618233149479088	build/compiler/CMakeFiles/dsl.dir/token.cpp.o	9bdc1ecf5c747045
 5	31	1650618224961739117	build/compiler/CMakeFiles/dsl.dir/grammar.cpp.o	66705baf0d1faa06
 8678	8791	1650991503755555127	build/compiler/COMPILER	8672a36eaf7199c
-0	70	1651255857698451764	build.ninja	a5e5af34d7644908
+0	70	1651567275442274443	build.ninja	a5e5af34d7644908
 5	51	1649711365611254019	build/compiler/CMakeFiles/dsl.dir/parser.cpp.o	1117a9dfe6888781
 5	8716	1650991444738542646	build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o	527f4c1f5a46463b
 9142	9244	1650618234173947324	build/compiler/dsl	2cab67bada2892e7
 3	8678	1650991503643598734	build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o	1317377b0e02b446
 5	1016	1649926090183271500	build/compiler/CMakeFiles/dsl.dir/entries.cpp.o	e6fee1df90476604
 6	9142	1650618234073901593	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
+5	10621	1651567925686692097	build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o	527f4c1f5a46463b
+4	12555	1651567927622615952	build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o	1317377b0e02b446
+12555	12681	1651567927746611072	build/compiler/COMPILER	8672a36eaf7199c

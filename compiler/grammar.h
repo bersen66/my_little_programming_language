@@ -299,7 +299,7 @@ namespace Nonterminals {
         void GenerateRPN(std::ostream &out) const override {
 
             static const std::unordered_map<ValType, std::string> TYPE_TO_STRING = {
-                    {ValType::INT_LITERAL,    "Integer"},
+                    {ValType::INT_LITERAL,    "Int"},
                     {ValType::STRING_LITERAL, "String"},
                     {ValType::BOOL_LITERAL,   "Bool"},
             };

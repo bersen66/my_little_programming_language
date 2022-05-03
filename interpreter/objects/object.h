@@ -277,9 +277,11 @@ public:
             throw std::runtime_error("Expected iterator in assignment");
         }
 
-        // возможна утечка
-        current_state = State::IS_VALID;
         auto othr = std::dynamic_pointer_cast<Iterator>(other);
+
+        // возможна утечка
+        current_state = othr->current_state;
+        //auto othr = std::dynamic_pointer_cast<Iterator>(other);
         value = othr->value;
     }
 
@@ -334,6 +336,11 @@ public:
     bool HasPrev() const {
         return value != nullptr && value->HasPrev();
     }
+
+    void Invalidate() {
+        current_state = State::IS_INVALID;
+    }
+
 
     ~Iterator() {
     }
@@ -403,12 +410,14 @@ public:
 
     ObjPtr InsertAfter(ObjPtr iterator, ObjPtr value) {
         auto it = std::dynamic_pointer_cast<Iterator>(iterator);
-        return std::make_shared<Iterator>(list_.InsertAfter(it->GetNode(),value));
+        return std::make_shared<Iterator>(list_.InsertAfter(it->GetNode(), value));
     }
 
     ObjPtr Erase(const ObjPtr &iterator) {
         auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
-        return std::make_shared<Iterator>(list_.Erase(iter->GetNode()));
+        auto res = std::make_shared<Iterator>(list_.Erase(iter->GetNode()));
+        iter->Invalidate();
+        return res;
     }
 
     std::size_t Hash() const override {
@@ -418,8 +427,12 @@ public:
     std::string ToString() const override {
         std::stringstream out;
         out << "<-> ";
-        list_.TravelWithCallback([&out](const bicycle::Node<ObjPtr> *val) {
-            out <<"("<< val->value->ToString() << ") <-> ";
+        list_.TravelWithCallback([&out, this](const bicycle::Node<ObjPtr> *val) {
+            if (val->value.get() == this) {
+                out << "[ ... ] <-> ";
+            } else {
+                out << "(" << val->value->ToString() << ") <-> ";
+            }
         });
         return out.str();
     }
@@ -430,7 +443,7 @@ public:
 
 
 private:
-   bicycle::LinkedList<ObjPtr> list_;
+    bicycle::LinkedList<ObjPtr> list_;
 };
 
 
@@ -484,10 +497,10 @@ ObjPtr ERS(ObjPtr &container, const ObjPtr &iterator);
 
 
 const std::unordered_map<std::string, Obj::Type> STRING_TO_TYPE = {
-        {"Integer", Obj::Type::BASIC_INT},
-        {"Bool",    Obj::Type::BASIC_BOOL},
-        {"Iterator",    Obj::Type::BASIC_ITERATOR},
-        {"LinkedList",    Obj::Type::BASIC_LINKED_LIST},
+        {"Int",        Obj::Type::BASIC_INT},
+        {"Bool",       Obj::Type::BASIC_BOOL},
+        {"Iterator",   Obj::Type::BASIC_ITERATOR},
+        {"LinkedList", Obj::Type::BASIC_LINKED_LIST},
 };
 
 

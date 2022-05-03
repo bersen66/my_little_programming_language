@@ -895,7 +895,7 @@ ObjPtr ERS(ObjPtr &container, const ObjPtr &iterator) {
     }
 
     auto cont = std::dynamic_pointer_cast<LinkedList>(container);
-    auto iter = std::dynamic_pointer_cast<Iterator>(iterator);
+    const auto& iter = std::dynamic_pointer_cast<Iterator>(iterator);
 
     if (!iter->IsValid()) {
         throw std::runtime_error("expected valid iterator!");

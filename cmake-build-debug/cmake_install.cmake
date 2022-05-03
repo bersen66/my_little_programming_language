@@ -37,16 +37,14 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/cmake_install.cmake")
+  # Include the install script for the subdirectory.
   include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/cmake_install.cmake")
-
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
