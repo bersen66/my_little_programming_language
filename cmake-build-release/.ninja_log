@@ -1,13 +1,7 @@
 # ninja log v5
-2249	2400	1647085422999433877	build/compiler/compiler	b7d1a34f2b8bfa3
-4	2248	1647085422847435515	build/compiler/CMakeFiles/compiler.dir/main.cpp.o	d1faa4813e0ee721
-6	8219	1650618233149479088	build/compiler/CMakeFiles/dsl.dir/token.cpp.o	9bdc1ecf5c747045
-5	31	1650618224961739117	build/compiler/CMakeFiles/dsl.dir/grammar.cpp.o	66705baf0d1faa06
-8678	8791	1650991503755555127	build/compiler/COMPILER	8672a36eaf7199c
-0	70	1651007108812702646	build.ninja	a5e5af34d7644908
-5	51	1649711365611254019	build/compiler/CMakeFiles/dsl.dir/parser.cpp.o	1117a9dfe6888781
-5	8716	1650991444738542646	build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o	527f4c1f5a46463b
-9142	9244	1650618234173947324	build/compiler/dsl	2cab67bada2892e7
-3	8678	1650991503643598734	build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o	1317377b0e02b446
-5	1016	1649926090183271500	build/compiler/CMakeFiles/dsl.dir/entries.cpp.o	e6fee1df90476604
-6	9142	1650618234073901593	build/compiler/CMakeFiles/dsl.dir/main.cpp.o	496e45d85acc3686
+1	1153	1651824459969351588	build/interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o	a70cfc12c2b5adc0
+1154	1165	1651824459985352066	build/interpreter/parsers/libparsing_stuff.a	e5d284af10cfe1ee
+1	3799	1651824462613431879	build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o	8b01947dee9811e8
+1	6530	1651824465345516937	build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o	46a4bf0cb0fd913a
+0	6813	1651824465629525902	build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o	53aee47f595a0234
+6813	6969	1651824465785530827	build/interpreter/INTERPRETER	838c18b5d454e22d

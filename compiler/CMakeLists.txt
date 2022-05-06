@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16)
 project(COMPILER)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS -Ofast)
 
-find_package(Boost COMPONENTS regex REQUIRED)
+find_package(Boost COMPONENTS regex program_options REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
 

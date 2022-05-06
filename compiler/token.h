@@ -18,18 +18,9 @@ struct Token {
 
     // ТЕРМИНАЛЫ
     enum class Type {
-        //KEYWORDS
-        //FOR_KEYWORD,
-        //WHILE_KEYWORD,
-        //STRUCT_KEYWORD,
-        //IF_KEYWORD,
-        //ELSE_KEYWORD,
-        //LOAD_KEYWORD,
-        //RETURN_KEYWORD,
-        //DO_KEYWORD,
-        //FUNC_KEYWORD,
-        //FIELD_KEYWORD,
         VAR_KEYWORD,
+        TRUE_KEYWORD,
+        FALSE_KEYWORD,
 
 
 
@@ -39,6 +30,28 @@ struct Token {
         DIV_OPERATOR,
         MOD_OPERATOR,
         DOT_OPERATOR,
+
+        GTOE_OPERATOR,  // >=
+        GT_OPERATOR,    // >
+        LT_OPERATOR,    // <
+        LTOE_OPERATOR,  // <=
+        EQ_OPERATOR,    // ==
+        NEQ_OPERATOR,   // !=
+        AND_OPERATOR,   // &&
+        OR_OPERATOR,    // ||
+
+
+        //NEW_OPERATOR,
+        GET_OPERATOR,
+        IS_VALID_OPERATOR,
+        HAS_NEXT_OPERATOR,
+        HAS_PREV_OPERATOR,
+        INSERT_AFTER_OPERATOR,
+        INSERT_BEFORE_OPERATOR,
+        ERASE_OPERATOR,
+
+
+
 
         ASSIGN_OPERATOR,
 
@@ -62,16 +75,14 @@ struct Token {
         SEMICOLON,
         UNDEFINED,
 
-        /*
-        STRUCT_NAME,
-        FUNC_NAME,
-        FIELD_NAME,
-        */
 
         VAR_NAME,
 
         BASIC_INT,
         BASIC_STRING,
+        BASIC_BOOL,
+        BASIC_LINKED_LIST,
+        BASIC_ITERATOR,
 
     };
 
@@ -104,7 +115,13 @@ const std::unordered_map<std::string_view, Token::Type> KEYWORDS = {
         //{"func",        Token::Type::FUNC_KEYWORD},
         //{"field",       Token::Type::FIELD_KEYWORD},
         {"var",         Token::Type::VAR_KEYWORD},
+        {"True",        Token::Type::TRUE_KEYWORD},
+        {"False",       Token::Type::FALSE_KEYWORD},
 };
+
+
+
+
 
 const std::unordered_map<std::string_view, Token::Type> OPERATORS = {
         {"+", Token::Type::ADD_OPERATOR},
@@ -113,11 +130,32 @@ const std::unordered_map<std::string_view, Token::Type> OPERATORS = {
         {"/", Token::Type::DIV_OPERATOR},
         {"%", Token::Type::MOD_OPERATOR},
         {".", Token::Type::DOT_OPERATOR},
+
+        {"<",  Token::Type::LT_OPERATOR},
+        {"<=", Token::Type::LTOE_OPERATOR},
+        {">",  Token::Type::GT_OPERATOR},
+        {">=", Token::Type::GTOE_OPERATOR},
+        {"==", Token::Type::EQ_OPERATOR},
+        {"!=", Token::Type::NEQ_OPERATOR},
+        {"&&", Token::Type::AND_OPERATOR},
+        {"||", Token::Type::OR_OPERATOR},
+
+        //{"New",   Token::Type::NEW_OPERATOR},
+        {"Erase", Token::Type::ERASE_OPERATOR},
+        {"InsertBefore", Token::Type::INSERT_BEFORE_OPERATOR},
+        {"InsertAfter", Token::Type::INSERT_AFTER_OPERATOR},
+        {"HasPrev", Token::Type::HAS_PREV_OPERATOR},
+        {"HasNext", Token::Type::HAS_NEXT_OPERATOR},
+        {"IsValid", Token::Type::IS_VALID_OPERATOR},
+        {"Get", Token::Type::GET_OPERATOR},
 };
 
 const std::unordered_map<std::string_view, Token::Type> BASIC_DATA_TYPES = {
         {"Int", Token::Type::BASIC_INT},
         {"String", Token::Type::BASIC_STRING},
+        {"Bool", Token::Type::BASIC_BOOL},
+        {"LinkedList", Token::Type::BASIC_LINKED_LIST},
+        {"Iterator", Token::Type::BASIC_ITERATOR},
 };
 
 const std::unordered_map<std::string_view, Token::Type> ASSIGN_OPERATOR = {

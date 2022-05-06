@@ -43,10 +43,13 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
+  # Include the install script for the subdirectory.
   include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler/cmake_install.cmake")
-  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/cmake_install.cmake")
+endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

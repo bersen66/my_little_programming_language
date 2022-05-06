@@ -79,14 +79,14 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 build cmake_object_order_depends_target_COMPILER: phony || build/compiler/CMakeFiles/COMPILER.dir
 
 build build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/main.cpp || cmake_object_order_depends_target_COMPILER
-  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_REGEX_DYN_LINK
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_REGEX_DYN_LINK
   DEP_FILE = build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o.d
   FLAGS = -Ofast -g -std=gnu++2a
   OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
   OBJECT_FILE_DIR = build/compiler/CMakeFiles/COMPILER.dir
 
 build build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/token.cpp || cmake_object_order_depends_target_COMPILER
-  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_REGEX_DYN_LINK
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_REGEX_DYN_LINK
   DEP_FILE = build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o.d
   FLAGS = -Ofast -g -std=gnu++2a
   OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
@@ -100,9 +100,9 @@ build build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o: CXX_COMPILER__COMPILER
 #############################################
 # Link the executable build/compiler/COMPILER
 
-build build/compiler/COMPILER: CXX_EXECUTABLE_LINKER__COMPILER_Debug build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o | /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+build build/compiler/COMPILER: CXX_EXECUTABLE_LINKER__COMPILER_Debug build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o | /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0 /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
   FLAGS = -Ofast -g
-  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
   OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -148,6 +148,7 @@ build build/compiler/rebuild_cache: phony build/compiler/CMakeFiles/rebuild_cach
 build cmake_object_order_depends_target_INTERPRETER: phony || cmake_object_order_depends_target_parsing_stuff
 
 build build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/main.cpp || cmake_object_order_depends_target_INTERPRETER
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
   DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
@@ -155,18 +156,20 @@ build build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INT
   OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
 build build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/virtual_machine.cpp || cmake_object_order_depends_target_INTERPRETER
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
   DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
-build build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/object.cpp || cmake_object_order_depends_target_INTERPRETER
-  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o.d
+build build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/objects/object.cpp || cmake_object_order_depends_target_INTERPRETER
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
-  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir/objects
 
 
 # =============================================================================
@@ -176,9 +179,9 @@ build build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o: CXX_COMPILER__I
 #############################################
 # Link the executable build/interpreter/INTERPRETER
 
-build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Debug build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/object.cpp.o | build/interpreter/parsers/libparsing_stuff.a || build/interpreter/parsers/libparsing_stuff.a
+build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Debug build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o | build/interpreter/parsers/libparsing_stuff.a /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0 || build/interpreter/parsers/libparsing_stuff.a
   FLAGS = -g
-  LINK_LIBRARIES = build/interpreter/parsers/libparsing_stuff.a
+  LINK_LIBRARIES = build/interpreter/parsers/libparsing_stuff.a  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
   OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -318,14 +321,14 @@ build build/interpreter/parsers/all: phony build/interpreter/parsers/libparsing_
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../compiler/CMakeLists.txt ../interpreter/CMakeLists.txt ../interpreter/parsers/CMakeLists.txt /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindBoost.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.71.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-static.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../compiler/CMakeLists.txt ../interpreter/CMakeLists.txt ../interpreter/parsers/CMakeLists.txt /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindBoost.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.71.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/boost_program_options-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/boost_program_options-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/libboost_program_options-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/libboost_program_options-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-static.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../compiler/CMakeLists.txt ../interpreter/CMakeLists.txt ../interpreter/parsers/CMakeLists.txt /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindBoost.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.71.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-static.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../compiler/CMakeLists.txt ../interpreter/CMakeLists.txt ../interpreter/parsers/CMakeLists.txt /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCXXInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeGenericSystem.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Compiler/GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindBoost.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/FindPackageMessage.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-C.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux-GNU.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/Linux.cmake /snap/clion/189/bin/cmake/linux/share/cmake-3.22/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.71.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/boost_program_options-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/boost_program_options-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/libboost_program_options-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.71.0/libboost_program_options-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/boost_regex-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0/libboost_regex-variant-static.cmake CMakeCache.txt CMakeFiles/3.22.3/CMakeCCompiler.cmake CMakeFiles/3.22.3/CMakeCXXCompiler.cmake CMakeFiles/3.22.3/CMakeSystem.cmake: phony
 
 
 #############################################

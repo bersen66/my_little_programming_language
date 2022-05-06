@@ -52,22 +52,63 @@ namespace Nonterminals {
             SUB,
             MUL,
             DIV,
+
+            GT,         // >
+            GTOE,       // >=
+            LT,         // <
+            LTOE,       // <=
+            EQ,         // ==
+            NEQ,        // !=
+
+            AND,        // &&
+            OR,         // ||
+
+
+            GET,
+            IS_VALID,
+            HAS_NEXT,
+            HAS_PREV,
+            INSERT_AFTER,
+            INSERT_BEFORE,
+            ERASE,
+
             OPARENTH,
             CPARENTH,
         };
 
-        Operator(OpType operation = OpType::ADD)
-                : Nonterminal(Nonterminal::Type::OPERATOR), type(operation) {}
+        Operator()
+                : Nonterminal(Nonterminal::Type::OPERATOR) {}
 
         std::string ToString() const override {
 
             static const std::unordered_map<OpType, std::string> TYPE_TO_STRING = {
-                    {OpType::ADD,      "+"},
-                    {OpType::SUB,      "-"},
-                    {OpType::MUL,      "*"},
-                    {OpType::DIV,      "/"},
-                    {OpType::OPARENTH, "("},
-                    {OpType::CPARENTH, ")"},
+                    {OpType::ADD,           "+"},
+                    {OpType::SUB,           "-"},
+                    {OpType::MUL,           "*"},
+                    {OpType::DIV,           "/"},
+
+                    {OpType::GT,            ">"},
+                    {OpType::GTOE,          ">="},
+                    {OpType::LT,            "<"},
+                    {OpType::LTOE,          "<="},
+                    {OpType::EQ,            "=="},
+                    {OpType::NEQ,           "!="},
+
+                    {OpType::AND,           "&&"},
+                    {OpType::OR,            "||"},
+
+                    {OpType::OPARENTH,      "("},
+                    {OpType::CPARENTH,      ")"},
+
+                    {OpType::GET,           "Get"},
+                    {OpType::IS_VALID,      "IsValid"},
+                    {OpType::HAS_NEXT,      "HasNext"},
+                    {OpType::HAS_PREV,      "HasPrev"},
+                    {OpType::INSERT_AFTER,  "InsertAfter"},
+                    {OpType::INSERT_BEFORE, "InsertBefore"},
+                    {OpType::ERASE,         "Erase"},
+
+
             };
 
             std::stringstream out;
@@ -78,39 +119,47 @@ namespace Nonterminals {
         void ParseFrom(TokenStream &stream) override {
             const Token &current_token = stream.GetCurrentToken();
 
-            switch (current_token.type) {
-                case Token::Type::ADD_OPERATOR: {
-                    type = OpType::ADD;
-                }
-                    break;
-                case Token::Type::SUB_OPERATOR: {
-                    type = OpType::SUB;
-                }
-                    break;
-                case Token::Type::DIV_OPERATOR: {
-                    type = OpType::DIV;
-                }
-                    break;
-                case Token::Type::MUL_OPERATOR: {
-                    type = OpType::MUL;
-                }
-                    break;
-                case Token::Type::OPEN_PARENTHESIS: {
-                    type = OpType::OPARENTH;
-                }
-                    break;
-                case Token::Type::CLOSE_PARENTHESIS: {
-                    type = OpType::CPARENTH;
-                }
-                    break;
-                default: {
-                    std::stringstream error;
-                    error << "Expected operator, but have -> " << current_token.value
-                          << " on line " << current_token.line_number << std::endl;
-                    throw std::runtime_error(error.str());
-                }
+            static const std::unordered_map<Token::Type, OpType> TOKEN_TYPE_TO_OP_TYPE = {
+                    {Token::Type::ADD_OPERATOR,           OpType::ADD},
+                    {Token::Type::SUB_OPERATOR,           OpType::SUB},
+                    {Token::Type::MUL_OPERATOR,           OpType::MUL},
+                    {Token::Type::DIV_OPERATOR,           OpType::DIV},
 
+                    {Token::Type::OPEN_PARENTHESIS,       OpType::OPARENTH},
+                    {Token::Type::CLOSE_PARENTHESIS,      OpType::CPARENTH},
+
+                    {Token::Type::LT_OPERATOR,            OpType::LT},
+                    {Token::Type::LTOE_OPERATOR,          OpType::LTOE},
+
+                    {Token::Type::GTOE_OPERATOR,          OpType::GTOE},
+                    {Token::Type::GT_OPERATOR,            OpType::GT},
+
+                    {Token::Type::EQ_OPERATOR,            OpType::EQ},
+                    {Token::Type::NEQ_OPERATOR,           OpType::NEQ},
+
+                    {Token::Type::AND_OPERATOR,           OpType::AND},
+                    {Token::Type::OR_OPERATOR,            OpType::OR},
+
+                    {Token::Type::GET_OPERATOR,           OpType::GET},
+                    {Token::Type::IS_VALID_OPERATOR,      OpType::IS_VALID},
+                    {Token::Type::HAS_NEXT_OPERATOR,      OpType::HAS_NEXT},
+                    {Token::Type::HAS_PREV_OPERATOR,      OpType::HAS_PREV},
+                    {Token::Type::INSERT_AFTER_OPERATOR,  OpType::INSERT_AFTER},
+                    {Token::Type::INSERT_BEFORE_OPERATOR, OpType::INSERT_BEFORE},
+                    {Token::Type::ERASE_OPERATOR,         OpType::ERASE},
+
+            };
+
+            if (TOKEN_TYPE_TO_OP_TYPE.contains(current_token.type)) {
+                type = TOKEN_TYPE_TO_OP_TYPE.at(current_token.type);
+            } else {
+                std::stringstream error;
+                error << "Expected operator, but have -> " << current_token.value
+                      << " on line " << current_token.line_number << std::endl;
+                throw std::runtime_error(error.str());
             }
+
+
             stream.MoveToNextToken();
         }
 
@@ -120,14 +169,37 @@ namespace Nonterminals {
 
         void GenerateRPN(std::ostream &out) const override {
 
-            switch (type) {
-                case OpType::ADD: {out << "ADD " << std::endl;} break;
-                case OpType::MUL: {out << "MUL " << std::endl;} break;
-                case OpType::DIV: {out << "DIV " << std::endl;} break;
-                case OpType::SUB: {out << "SUB " << std::endl;} break;
-                default: {
-                    return;
-                } break;
+            static const std::unordered_map<OpType, std::string> TYPE_TO_RPN = {
+                    {OpType::ADD,           "ADD"},
+                    {OpType::SUB,           "SUB"},
+                    {OpType::MUL,           "MUL"},
+                    {OpType::DIV,           "DIV"},
+
+                    {OpType::GT,            "GT"},
+                    {OpType::GTOE,          "GTOE"},
+                    {OpType::LT,            "LT"},
+                    {OpType::LTOE,          "LTOE"},
+                    {OpType::EQ,            "EQ"},
+                    {OpType::NEQ,           "NEQ"},
+
+                    {OpType::AND,           "AND"},
+                    {OpType::OR,            "OR"},
+
+
+                    {OpType::OPARENTH,      ""},
+                    {OpType::CPARENTH,      ""},
+
+                    {OpType::GET,           "GET"},
+                    {OpType::IS_VALID,      "ISVAL"},
+                    {OpType::HAS_NEXT,      "HSNXT"},
+                    {OpType::HAS_PREV,      "HSPRV"},
+                    {OpType::INSERT_AFTER,  "INSA"},
+                    {OpType::INSERT_BEFORE, "INSB"},
+                    {OpType::ERASE,         "ERS"},
+            };
+
+            if (type != OpType::OPARENTH && type != OpType::CPARENTH) {
+                out << TYPE_TO_RPN.at(type) << " " << std::endl;
             }
 
         }
@@ -136,10 +208,46 @@ namespace Nonterminals {
         OpType type;
     };
 
+    bool IsOperator(Token::Type type) {
+
+        static const std::unordered_map<Token::Type, Operator::OpType> TOKEN_TYPE_TO_OP_TYPE = {
+                {Token::Type::ADD_OPERATOR,           Operator::OpType::ADD},
+                {Token::Type::SUB_OPERATOR,           Operator::OpType::SUB},
+                {Token::Type::MUL_OPERATOR,           Operator::OpType::MUL},
+                {Token::Type::DIV_OPERATOR,           Operator::OpType::DIV},
+
+                {Token::Type::OPEN_PARENTHESIS,       Operator::OpType::OPARENTH},
+                {Token::Type::CLOSE_PARENTHESIS,      Operator::OpType::CPARENTH},
+
+                {Token::Type::LT_OPERATOR,            Operator::OpType::LT},
+                {Token::Type::LTOE_OPERATOR,          Operator::OpType::LTOE},
+
+                {Token::Type::GTOE_OPERATOR,          Operator::OpType::GTOE},
+                {Token::Type::GT_OPERATOR,            Operator::OpType::GT},
+
+                {Token::Type::EQ_OPERATOR,            Operator::OpType::EQ},
+                {Token::Type::NEQ_OPERATOR,           Operator::OpType::NEQ},
+
+                {Token::Type::AND_OPERATOR,           Operator::OpType::AND},
+                {Token::Type::OR_OPERATOR,            Operator::OpType::OR},
+
+                {Token::Type::GET_OPERATOR,           Operator::OpType::GET},
+                {Token::Type::IS_VALID_OPERATOR,      Operator::OpType::IS_VALID},
+                {Token::Type::HAS_NEXT_OPERATOR,      Operator::OpType::HAS_NEXT},
+                {Token::Type::HAS_PREV_OPERATOR,      Operator::OpType::HAS_PREV},
+                {Token::Type::INSERT_AFTER_OPERATOR,  Operator::OpType::INSERT_AFTER},
+                {Token::Type::INSERT_BEFORE_OPERATOR, Operator::OpType::INSERT_BEFORE},
+                {Token::Type::ERASE_OPERATOR,         Operator::OpType::ERASE},
+        };
+        return TOKEN_TYPE_TO_OP_TYPE.contains(type);
+    }
+
+
     class RValue : public Nonterminal {
     public:
         enum class ValType {
             INT_LITERAL,
+            BOOL_LITERAL,
             STRING_LITERAL,
         };
 
@@ -148,22 +256,13 @@ namespace Nonterminals {
         std::string ToString() const override {
             static const std::unordered_map<ValType, std::string> TYPE_TO_STRING = {
                     {ValType::INT_LITERAL,    "INTEGER"},
-                    {ValType::STRING_LITERAL, "STRING: "},
+                    {ValType::STRING_LITERAL, "STRING"},
+                    {ValType::BOOL_LITERAL,   "BOOL"},
             };
 
             std::stringstream out;
             out << "RVALUE NONTERM: TYPE ->" << TYPE_TO_STRING.at(type) << "\t";
-            switch (type) {
-                case ValType::INT_LITERAL : {
-                    out << "VALUE -> " << std::get<int>(value);
-                }
-                    break;
-
-                case ValType::STRING_LITERAL : {
-                    out << "VALUE -> " << std::get<std::string>(value);
-                }
-                    break;
-            }
+            out << "VALUE -> " << value;
             return out.str();
         }
 
@@ -173,12 +272,16 @@ namespace Nonterminals {
             switch (current_token.type) {
                 case Token::Type::STRING_CONSTANT: {
                     type = ValType::STRING_LITERAL;
-                    value.emplace<std::string>(current_token.value);
                 }
                     break;
                 case Token::Type::NUMBER_CONSTANT : {
                     type = ValType::INT_LITERAL;
-                    value.emplace<int>(std::stoi(current_token.value));
+                }
+                    break;
+
+                case Token::Type::TRUE_KEYWORD:
+                case Token::Type::FALSE_KEYWORD: {
+                    type = ValType::BOOL_LITERAL;
                 }
                     break;
                 default: {
@@ -189,21 +292,35 @@ namespace Nonterminals {
                 }
             }
 
+            value = current_token.value;
             stream.MoveToNextToken();
         }
 
         void GenerateRPN(std::ostream &out) const override {
-            if (std::holds_alternative<int>(value)) {
-                out << "PUSH Int " << std::get<int>(value) << std::endl;
-            } else {
-                out << "PUSH String " << std::get<std::string>(value) << std::endl;
-            }
+
+            static const std::unordered_map<ValType, std::string> TYPE_TO_STRING = {
+                    {ValType::INT_LITERAL,    "Int"},
+                    {ValType::STRING_LITERAL, "String"},
+                    {ValType::BOOL_LITERAL,   "Bool"},
+            };
+
+            out << "PUSH " << TYPE_TO_STRING.at(type) << " " << value << std::endl;
+
         }
 
     private:
-        ValType type;
-        std::variant<int, std::string> value;
+        ValType type;;
+        std::string value;
     };
+
+    bool IsRValue(Token::Type type) {
+        return
+                type == Token::Type::TRUE_KEYWORD
+                || type == Token::Type::FALSE_KEYWORD
+                || type == Token::Type::NUMBER_CONSTANT
+                || type == Token::Type::STRING_CONSTANT;
+    }
+
 
     class LValue : public Nonterminal {
     public:
@@ -250,12 +367,20 @@ namespace Nonterminals {
         std::string name;
     };
 
+    bool IsLvalue(Token::Type type) {
+        type == Token::Type::VAR_NAME
+        || type == Token::Type::IDENTIFIER;
+    }
+
     class DataType : public Nonterminal {
     public:
 
         enum class Typename {
             INT,
             STRING,
+            BOOL,
+            LINKED_LIST,
+            ITERATOR,
         };
 
         DataType(Typename type = Typename::INT)
@@ -264,8 +389,12 @@ namespace Nonterminals {
         std::string ToString() const override {
 
             static const std::unordered_map<Typename, std::string> TYPE_TO_STRING = {
-                    {Typename::INT,    "Int"},
-                    {Typename::STRING, "String"},
+                    {Typename::INT,         "Int"},
+                    {Typename::STRING,      "String"},
+                    {Typename::BOOL,        "Bool"},
+                    {Typename::LINKED_LIST, "LinkedList"},
+                    {Typename::ITERATOR,    "Iterator"},
+
             };
 
             std::stringstream out;
@@ -283,8 +412,11 @@ namespace Nonterminals {
             const auto &current_token = stream.GetCurrentToken();
 
             const static std::unordered_map<Token::Type, Typename> types = {
-                    {Token::Type::BASIC_STRING, Typename::STRING},
-                    {Token::Type::BASIC_INT,    Typename::INT},
+                    {Token::Type::BASIC_STRING,      Typename::STRING},
+                    {Token::Type::BASIC_INT,         Typename::INT},
+                    {Token::Type::BASIC_BOOL,        Typename::BOOL},
+                    {Token::Type::BASIC_LINKED_LIST, Typename::LINKED_LIST},
+                    {Token::Type::BASIC_ITERATOR,    Typename::ITERATOR},
             };
 
             if (types.contains(current_token.type)) {
@@ -302,8 +434,12 @@ namespace Nonterminals {
 
         void GenerateRPN(std::ostream &out) const override {
             static const std::unordered_map<Typename, std::string> TYPE_TO_STRING = {
-                    {Typename::INT,    "Int"},
-                    {Typename::STRING, "String"},
+                    {Typename::INT,         "Int"},
+                    {Typename::STRING,      "String"},
+                    {Typename::BOOL,        "Bool"},
+                    {Typename::LINKED_LIST, "LinkedList"},
+                    {Typename::ITERATOR,    "Iterator"},
+
             };
             out << TYPE_TO_STRING.at(type);
         }
@@ -454,6 +590,8 @@ namespace Nonterminals {
 
                 switch (current_token.type) {
 
+                    case TokType::TRUE_KEYWORD:
+                    case TokType::FALSE_KEYWORD:
                     case TokType::NUMBER_CONSTANT:
                     case TokType::STRING_CONSTANT: {
                         NontermHolder rval = MakeNonterminal(NtType::RVALUE);
@@ -505,6 +643,25 @@ namespace Nonterminals {
                     }
                         break;
 
+                    case TokType::GET_OPERATOR:
+                    case TokType::ERASE_OPERATOR:
+                    case TokType::INSERT_BEFORE_OPERATOR:
+                    case TokType::INSERT_AFTER_OPERATOR: {
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+                        frames.push(oper);
+                    }
+                        break;
+
+                    case TokType::IS_VALID_OPERATOR:
+                    case TokType::HAS_NEXT_OPERATOR:
+                    case TokType::HAS_PREV_OPERATOR: {
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+                        result.push_back(oper);
+                    }
+                        break;
+
                     case TokType::MUL_OPERATOR:
                     case TokType::DIV_OPERATOR: {
 
@@ -533,9 +690,6 @@ namespace Nonterminals {
                                             Operator::OpType::MUL
                                             || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
                                                Operator::OpType::DIV
-                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
-                                               Operator::OpType::OPARENTH
-
                                     )
                                     ) {
                                 //std::cerr << frames.top()->ToString() << std::endl;
@@ -548,6 +702,200 @@ namespace Nonterminals {
 
                     }
                         break;
+
+                    case TokType::LTOE_OPERATOR:
+                    case TokType::LT_OPERATOR:
+                    case TokType::GT_OPERATOR:
+                    case TokType::GTOE_OPERATOR: {
+
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+
+                        if (frames.empty()
+                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                               Operator::OpType::OPARENTH) {
+                            frames.push(oper);
+                        } else {
+
+                            while (
+                                    !frames.empty()
+                                    && std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                       Operator::OpType::OPARENTH
+                                    && (
+                                            std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                            Operator::OpType::MUL
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::DIV
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::SUB
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::ADD
+                                    )
+                                    ) {
+                                //std::cerr << frames.top()->ToString() << std::endl;
+
+                                if (
+                                        std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                        Operator::OpType::LTOE
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::LT
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::GT
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::GTOE
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::EQ
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::NEQ
+
+                                        ) {
+                                    std::stringstream error;
+                                    error << "INVALID LOGIC EXPRESSION" << std::endl;
+                                    throw std::runtime_error(error.str());
+                                }
+
+                                result.push_back(frames.top());
+                                frames.pop();
+                            }
+
+                            frames.push(oper);
+                        }
+
+                    }
+                        break;
+
+
+                    case TokType::NEQ_OPERATOR:
+                    case TokType::EQ_OPERATOR: {
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+
+                        if (frames.empty()
+                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                               Operator::OpType::OPARENTH) {
+                            frames.push(oper);
+                        } else {
+
+                            while (
+                                    !frames.empty()
+                                    && std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                       Operator::OpType::OPARENTH
+                                    && (
+                                            std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                            Operator::OpType::MUL
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::DIV
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::SUB
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::ADD
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::LTOE
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::LT
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::GT
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                               Operator::OpType::GTOE
+
+                                    )
+                                    ) {
+                                //std::cerr << frames.top()->ToString() << std::endl;
+
+                                if (
+                                        std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                        Operator::OpType::LTOE
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::LT
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::GT
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::GTOE
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::EQ
+                                        || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                                           Operator::OpType::NEQ
+                                        ) {
+                                    std::stringstream error;
+                                    error << "INVALID LOGIC EXPRESSION" << std::endl;
+                                    throw std::runtime_error(error.str());
+                                }
+
+                                result.push_back(frames.top());
+                                frames.pop();
+                            }
+
+                            frames.push(oper);
+                        }
+                    }
+                        break;
+
+
+                    case TokType::AND_OPERATOR: {
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+
+                        if (frames.empty()
+                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                               Operator::OpType::OPARENTH) {
+                            frames.push(oper);
+                        } else {
+
+                            while (
+                                    !frames.empty()
+                                    && std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                       Operator::OpType::OPARENTH
+                                    && (
+                                            std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                            Operator::OpType::AND
+                                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                               Operator::OpType::OR
+                                    )
+                                    ) {
+                                std::cerr << frames.top()->ToString() << std::endl;
+
+                                result.push_back(frames.top());
+                                frames.pop();
+                            }
+
+                            frames.push(oper);
+                        }
+
+                    }
+                        break;
+
+
+                    case TokType::OR_OPERATOR: {
+                        NontermHolder oper = MakeNonterminal(NtType::OPERATOR);
+                        oper->ParseFrom(stream);
+
+                        if (frames.empty()
+                            || std::dynamic_pointer_cast<Operator>(frames.top())->GetType() ==
+                               Operator::OpType::OPARENTH) {
+                            frames.push(oper);
+                        } else {
+
+                            while (
+                                    !frames.empty()
+                                    && std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                       Operator::OpType::OPARENTH
+                                    && (
+                                            std::dynamic_pointer_cast<Operator>(frames.top())->GetType() !=
+                                            Operator::OpType::OR
+                                    )
+                                    ) {
+                                //std::cerr << frames.top()->ToString() << std::endl;
+
+                                result.push_back(frames.top());
+                                frames.pop();
+                            }
+
+                            frames.push(oper);
+                        }
+
+                    }
+                        break;
+
 
                     case TokType::SEMICOLON: {
                         while (!frames.empty()) {
@@ -572,6 +920,7 @@ namespace Nonterminals {
             }
 
             stream.MoveToNextToken();
+
         }
 
 

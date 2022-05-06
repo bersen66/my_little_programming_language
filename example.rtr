@@ -1,0 +1,5 @@
+var A Int = 213;
+
+var B Int = A * 2134;
+
+

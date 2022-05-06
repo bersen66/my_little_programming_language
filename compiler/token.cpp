@@ -7,9 +7,6 @@
 #include <iostream>
 
 
-#include <boost/regex.hpp>
-#include <boost/regex/icu.hpp>
-
 
 bool IsKeyword(const std::string_view &lexem) {
     return KEYWORDS.contains(lexem);
@@ -53,6 +50,8 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
         return BASIC_DATA_TYPES.at(lexem);
     } else if (IsKeyword(lexem)) {
         return KEYWORDS.at(lexem);
+    } else if (IsOperator(lexem)) {
+        return OPERATORS.at(lexem);
     } else if (IsIdentifier(lexem)) {
         return Token::Type::IDENTIFIER;
     } else if (IsStringConstant(lexem)) {
@@ -65,8 +64,6 @@ std::optional<Token::Type> GetTokenType(std::string_view lexem) {
         return ASSIGN_OPERATOR.at(lexem);
     } else if (IsSeparator(lexem)) {
         return SEPARATORS.at(lexem);
-    } else if (IsOperator(lexem)) {
-        return OPERATORS.at(lexem);
     } else
         return std::nullopt;
 }
@@ -110,98 +107,6 @@ std::optional<Token> GetNextToken(std::string_view &str) {
 
     return std::nullopt;
 }
-
-
-/*
-std::vector<Token> SplitIntoTokens(std::string_view text) {
-    std::vector<Token> result;
-
-    int line_number = 1;
-
-    enum class State {
-        WAITING_FOR_FUNCTION_NAME,
-        DOESNT_WAITING,
-        WAITING_FOR_STRUCT_NAME,
-        WAITING_FOR_FIELD_NAME,
-        WAITING_FOR_VAR_NAME,
-    };
-
-    State current_state = State::DOESNT_WAITING;
-
-    do {
-
-        auto token = GetNextToken(text);
-
-        if (token.has_value()) {
-            if (token.value().type == Token::Type::ENDLINE) {
-                line_number++;
-                continue;
-            }
-
-
-            if (current_state == State::DOESNT_WAITING) {
-
-                if (token.value().type == Token::Type::STRUCT_KEYWORD) {
-                    current_state = State::WAITING_FOR_STRUCT_NAME;
-                } else if (token.value().type == Token::Type::FUNC_KEYWORD) {
-                    current_state = State::WAITING_FOR_FUNCTION_NAME;
-                } else if (token.value().type == Token::Type::FIELD_KEYWORD) {
-                    current_state = State::WAITING_FOR_FIELD_NAME;
-                } else if (token.value().type == Token::Type::VAR_KEYWORD) {
-                    current_state = State::WAITING_FOR_VAR_NAME;
-                }
-
-
-                if (token.value().type != Token::Type::TAB && token.value().type != Token::Type::SPACE) {
-                    token.value().line_number = line_number;
-                    result.emplace_back(token.value());
-                }
-
-
-            } else {
-                if (IsSeparator(token.value().value))
-                    continue;
-                /*
-                if (token.value().type == Token::Type::IDENTIFIER) {
-
-                    if (current_state == State::WAITING_FOR_STRUCT_NAME) {
-                        token.value().type = Token::Type::STRUCT_NAME;
-                    } else if (current_state == State::WAITING_FOR_FUNCTION_NAME) {
-                        token.value().type = Token::Type::FUNC_NAME;
-                    } else if (current_state == State::WAITING_FOR_FIELD_NAME) {
-                        token.value().type = Token::Type::FIELD_NAME;
-                    }  else if (current_state == State::WAITING_FOR_VAR_NAME) {
-                        token.value().type = Token::Type::VAR_NAME;
-                    }
-                    token.value().line_number = line_number;
-                    result.push_back(token.value());
-
-                    current_state = State::DOESNT_WAITING;
-
-                } else {
-                    std::cerr << "EXPECTED NAME ON LINE: " << line_number << std::endl;
-                    break;
-                }
-
-
-
-
-            }
-
-
-        } else {
-            std::cerr << "Problem on line " << line_number << std::endl;
-            break;
-        }
-
-    } while (!text.empty());
-
-
-    return result;
-}
-*/
-
-
 
 std::vector<Token> SplitIntoTokens(std::string_view text) {
     std::vector<Token> result;

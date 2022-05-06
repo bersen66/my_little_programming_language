@@ -1,51 +1,101 @@
 Терминалы:
 
-IDENTIFIER        = [a-zA-Z_]+
-STRING_CONSTANT   = (\\.|[^\\"])*
-NUMBER_CONSTANT   = [-]?\d+
-OPEN_PARENTHESIS  = (
-CLOSE_PARENTHESIS = )
-ADD_OPERATOR      = +
-SUB_OPERATOR      = -
-MUL_OPERATOR      = *
-DIV_OPERATOR      = /
-VAR_KEYW          = var
-INT_KEYW          = Int
-SEMICOLON         = ;
+IDENTIFIER              = [a-zA-Z_]+
+STRING_CONSTANT         = "(\\.|[^\\"])*"
+NUMBER_CONSTANT         = [-]?\d+
+OPEN_PARENTHESIS        = (
+CLOSE_PARENTHESIS       = )
+
+ADD_OPERATOR            = +
+SUB_OPERATOR            = -
+MUL_OPERATOR            = *
+DIV_OPERATOR            = /
+
+LT_OPERATOR             = <
+LTOE_OPERATOR           = <=
+GT_OPERATOR             = >
+GTOE_OPERATOR           = >=
+EQ_OPERATOR             = ==
+NEQ_OPERATOR            = !=
+
+AND_OPERATOR            = &&
+OR_OPERATOR             = ||
+
+
+GET_OPERATOR            = Get
+IS_VALID_OPERATOR       = IsValid
+HAS_NEXT_OPERATOR       = HasNext
+HAS_PREV_OPERATOR       = HasPrev
+INSERT_AFTER_OPERATOR   = InsertAfter
+INSERT_BEFORE_OPERATOR  = InsertBefore
+ERASE_OPERATOR          = Erase
+
+VAR_KEYW                = var
+
+INT_KEYW                = Int
+BOOL_KEYW               = Bool
+BASIC_LINKED_LIST       = LinkedList
+BASIC_ITERATOR          = Iterator
+
+SEMICOLON               = ;
 
 ===================================================================================================
 
 Нетерминалы:
 
-lang -> assign_expr*
+lang        -> assign_expr*
 
-assign_expr -> assignable '=' value_expr;
+assign_expr ->  assignable '=' value_expr;
 
-value_expr  -> lvalue(op value_expr)*
-              | rvalue(op value_expr)*
-              | '('value_expr')'(op value_expr)*
-              ;
+value_expr  ->  value (op value_expr)*
+                | value (op value_expr)*
+                | '('value_expr')'(op value_expr)*
+                ;
 
+value       -> lvalue
+               | rvalue
+               ;
 
 rvalue      ->  NUMBER_CONSTANT
                 | STRING_CONSTANT
+                | TRUE_KEYW
+                | FALSE_KEYW
                 ;
 
 lvalue      -> IDENTIFIER
+               ;
 
 assignable  -> lvalue
-              | var_decl
-              ;
+               | var_decl
+               ;
 
 var_decl    -> VAR_KEYW IDENTIFIER type
+               ;
 
 type        -> INT_KEYW
+               | BOOL_KEYW
+               | LINKED_LIST
+               | ITERATOR
+               ;
 
 op          -> +
-              |-
-              |*
-              |/
-              ;
+               | -
+               | *
+               | /
+               | ==
+               | !=
+               | >
+               | >=
+               | <=
+               | <
+               | Get
+               | IsValid        // только для итераторов
+               | HasNext        // только для итераторов
+               | HasPrev        // только для итераторов
+               | InsertAfter
+               | InsertBefore
+               | Erase
+               ;
 
 
 
