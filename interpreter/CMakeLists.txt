@@ -7,7 +7,8 @@ set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(parsers)
 include_directories(parsers)
 
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
+
 include_directories(${Boost_INCLUDE_DIR})
 
 
@@ -27,5 +28,5 @@ set(
 
 add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} parsing_stuff)
+target_link_libraries(${PROJECT_NAME} PUBLIC parsing_stuff)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${Boost_LIBRARIES})
