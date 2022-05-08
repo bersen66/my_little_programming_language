@@ -10,7 +10,6 @@
 #include <string_view>
 #include <regex>
 
-#include <boost/regex/icu.hpp>
 #include <boost/regex.hpp>
 
 

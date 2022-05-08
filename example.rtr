@@ -1,0 +1,8 @@
+var A Int = 21321 + 324;
+
+var B Int = A + 4;
+
+var Q LinkedList = 0;
+
+var tail Iterator = Q InsertAfter(21323);
+tail = Q InsertAfter tail True;
