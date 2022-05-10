@@ -31,8 +31,10 @@
 *.out
 *.app
 
+
 .idea
 CMakeCache.txt
 cmake_install.cmake
-
 .CMakeFiles
+.cmake-build-debug
+.cmake-build-release
