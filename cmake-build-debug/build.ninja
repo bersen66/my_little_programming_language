@@ -76,21 +76,21 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Order-only phony target for COMPILER
 
-build cmake_object_order_depends_target_COMPILER: phony || compiler/CMakeFiles/COMPILER.dir
+build cmake_object_order_depends_target_COMPILER: phony || build/compiler/CMakeFiles/COMPILER.dir
 
-build compiler/CMakeFiles/COMPILER.dir/main.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/main.cpp || cmake_object_order_depends_target_COMPILER
+build build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/main.cpp || cmake_object_order_depends_target_COMPILER
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_REGEX_DYN_LINK
-  DEP_FILE = compiler/CMakeFiles/COMPILER.dir/main.cpp.o.d
+  DEP_FILE = build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o.d
   FLAGS = -Ofast -g -std=gnu++2a
-  OBJECT_DIR = compiler/CMakeFiles/COMPILER.dir
-  OBJECT_FILE_DIR = compiler/CMakeFiles/COMPILER.dir
+  OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
+  OBJECT_FILE_DIR = build/compiler/CMakeFiles/COMPILER.dir
 
-build compiler/CMakeFiles/COMPILER.dir/token.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/token.cpp || cmake_object_order_depends_target_COMPILER
+build build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o: CXX_COMPILER__COMPILER_Debug /home/ortur/CLionProjects/my_little_programming_language/compiler/token.cpp || cmake_object_order_depends_target_COMPILER
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_REGEX_DYN_LINK
-  DEP_FILE = compiler/CMakeFiles/COMPILER.dir/token.cpp.o.d
+  DEP_FILE = build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o.d
   FLAGS = -Ofast -g -std=gnu++2a
-  OBJECT_DIR = compiler/CMakeFiles/COMPILER.dir
-  OBJECT_FILE_DIR = compiler/CMakeFiles/COMPILER.dir
+  OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
+  OBJECT_FILE_DIR = build/compiler/CMakeFiles/COMPILER.dir
 
 
 # =============================================================================
@@ -98,40 +98,40 @@ build compiler/CMakeFiles/COMPILER.dir/token.cpp.o: CXX_COMPILER__COMPILER_Debug
 
 
 #############################################
-# Link the executable compiler/COMPILER
+# Link the executable build/compiler/COMPILER
 
-build compiler/COMPILER: CXX_EXECUTABLE_LINKER__COMPILER_Debug compiler/CMakeFiles/COMPILER.dir/main.cpp.o compiler/CMakeFiles/COMPILER.dir/token.cpp.o | /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0 /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+build build/compiler/COMPILER: CXX_EXECUTABLE_LINKER__COMPILER_Debug build/compiler/CMakeFiles/COMPILER.dir/main.cpp.o build/compiler/CMakeFiles/COMPILER.dir/token.cpp.o | /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0 /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
   FLAGS = -Ofast -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-  OBJECT_DIR = compiler/CMakeFiles/COMPILER.dir
+  OBJECT_DIR = build/compiler/CMakeFiles/COMPILER.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = compiler/COMPILER
+  TARGET_FILE = build/compiler/COMPILER
   TARGET_PDB = COMPILER.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
-build compiler/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/compiler/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
 
-build compiler/edit_cache: phony compiler/CMakeFiles/edit_cache.util
+build build/compiler/edit_cache: phony build/compiler/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build compiler/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/compiler/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build compiler/rebuild_cache: phony compiler/CMakeFiles/rebuild_cache.util
+build build/compiler/rebuild_cache: phony build/compiler/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -147,29 +147,29 @@ build compiler/rebuild_cache: phony compiler/CMakeFiles/rebuild_cache.util
 
 build cmake_object_order_depends_target_INTERPRETER: phony || cmake_object_order_depends_target_parsing_stuff
 
-build interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/main.cpp || cmake_object_order_depends_target_INTERPRETER
+build build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/main.cpp || cmake_object_order_depends_target_INTERPRETER
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
-  DEP_FILE = interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o.d
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
-  OBJECT_DIR = interpreter/CMakeFiles/INTERPRETER.dir
-  OBJECT_FILE_DIR = interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
-build interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/virtual_machine.cpp || cmake_object_order_depends_target_INTERPRETER
+build build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/virtual_machine.cpp || cmake_object_order_depends_target_INTERPRETER
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
-  DEP_FILE = interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o.d
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
-  OBJECT_DIR = interpreter/CMakeFiles/INTERPRETER.dir
-  OBJECT_FILE_DIR = interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
 
-build interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/objects/object.cpp || cmake_object_order_depends_target_INTERPRETER
+build build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o: CXX_COMPILER__INTERPRETER_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/objects/object.cpp || cmake_object_order_depends_target_INTERPRETER
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK
-  DEP_FILE = interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o.d
+  DEP_FILE = build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o.d
   FLAGS = -g -std=gnu++2a
   INCLUDES = -I/home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers
-  OBJECT_DIR = interpreter/CMakeFiles/INTERPRETER.dir
-  OBJECT_FILE_DIR = interpreter/CMakeFiles/INTERPRETER.dir/objects
+  OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
+  OBJECT_FILE_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir/objects
 
 
 # =============================================================================
@@ -177,40 +177,40 @@ build interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o: CXX_COMPILER_
 
 
 #############################################
-# Link the executable interpreter/INTERPRETER
+# Link the executable build/interpreter/INTERPRETER
 
-build interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Debug interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o | interpreter/parsers/libparsing_stuff.a /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0 || interpreter/parsers/libparsing_stuff.a
+build build/interpreter/INTERPRETER: CXX_EXECUTABLE_LINKER__INTERPRETER_Debug build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o | build/interpreter/parsers/libparsing_stuff.a /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0 || build/interpreter/parsers/libparsing_stuff.a
   FLAGS = -g
-  LINK_LIBRARIES = interpreter/parsers/libparsing_stuff.a  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
-  OBJECT_DIR = interpreter/CMakeFiles/INTERPRETER.dir
+  LINK_LIBRARIES = build/interpreter/parsers/libparsing_stuff.a  /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+  OBJECT_DIR = build/interpreter/CMakeFiles/INTERPRETER.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = interpreter/INTERPRETER
+  TARGET_FILE = build/interpreter/INTERPRETER
   TARGET_PDB = INTERPRETER.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
-build interpreter/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/interpreter/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
 
-build interpreter/edit_cache: phony interpreter/CMakeFiles/edit_cache.util
+build build/interpreter/edit_cache: phony build/interpreter/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build interpreter/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/interpreter/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build interpreter/rebuild_cache: phony interpreter/CMakeFiles/rebuild_cache.util
+build build/interpreter/rebuild_cache: phony build/interpreter/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -224,13 +224,13 @@ build interpreter/rebuild_cache: phony interpreter/CMakeFiles/rebuild_cache.util
 #############################################
 # Order-only phony target for parsing_stuff
 
-build cmake_object_order_depends_target_parsing_stuff: phony || interpreter/parsers/CMakeFiles/parsing_stuff.dir
+build cmake_object_order_depends_target_parsing_stuff: phony || build/interpreter/parsers/CMakeFiles/parsing_stuff.dir
 
-build interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o: CXX_COMPILER__parsing_stuff_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers/parsing_stuff.cpp || cmake_object_order_depends_target_parsing_stuff
-  DEP_FILE = interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o.d
+build build/interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o: CXX_COMPILER__parsing_stuff_Debug /home/ortur/CLionProjects/my_little_programming_language/interpreter/parsers/parsing_stuff.cpp || cmake_object_order_depends_target_parsing_stuff
+  DEP_FILE = build/interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o.d
   FLAGS = -g -std=gnu++2a
-  OBJECT_DIR = interpreter/parsers/CMakeFiles/parsing_stuff.dir
-  OBJECT_FILE_DIR = interpreter/parsers/CMakeFiles/parsing_stuff.dir
+  OBJECT_DIR = build/interpreter/parsers/CMakeFiles/parsing_stuff.dir
+  OBJECT_FILE_DIR = build/interpreter/parsers/CMakeFiles/parsing_stuff.dir
 
 
 # =============================================================================
@@ -238,50 +238,50 @@ build interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o: CXX_
 
 
 #############################################
-# Link the static library interpreter/parsers/libparsing_stuff.a
+# Link the static library build/interpreter/parsers/libparsing_stuff.a
 
-build interpreter/parsers/libparsing_stuff.a: CXX_STATIC_LIBRARY_LINKER__parsing_stuff_Debug interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o
+build build/interpreter/parsers/libparsing_stuff.a: CXX_STATIC_LIBRARY_LINKER__parsing_stuff_Debug build/interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g
-  OBJECT_DIR = interpreter/parsers/CMakeFiles/parsing_stuff.dir
+  OBJECT_DIR = build/interpreter/parsers/CMakeFiles/parsing_stuff.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = interpreter/parsers/libparsing_stuff.a
+  TARGET_FILE = build/interpreter/parsers/libparsing_stuff.a
   TARGET_PDB = parsing_stuff.a.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
-build interpreter/parsers/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter/parsers && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/interpreter/parsers/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/parsers && /snap/clion/189/bin/cmake/linux/bin/ccmake -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
 
-build interpreter/parsers/edit_cache: phony interpreter/parsers/CMakeFiles/edit_cache.util
+build build/interpreter/parsers/edit_cache: phony build/interpreter/parsers/CMakeFiles/edit_cache.util
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build interpreter/parsers/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter/parsers && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
+build build/interpreter/parsers/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/parsers && /snap/clion/189/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/ortur/CLionProjects/my_little_programming_language -B/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build interpreter/parsers/rebuild_cache: phony interpreter/parsers/CMakeFiles/rebuild_cache.util
+build build/interpreter/parsers/rebuild_cache: phony build/interpreter/parsers/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Target aliases.
 
-build COMPILER: phony compiler/COMPILER
+build COMPILER: phony build/compiler/COMPILER
 
-build INTERPRETER: phony interpreter/INTERPRETER
+build INTERPRETER: phony build/interpreter/INTERPRETER
 
-build libparsing_stuff.a: phony interpreter/parsers/libparsing_stuff.a
+build libparsing_stuff.a: phony build/interpreter/parsers/libparsing_stuff.a
 
-build parsing_stuff: phony interpreter/parsers/libparsing_stuff.a
+build parsing_stuff: phony build/interpreter/parsers/libparsing_stuff.a
 
 # =============================================================================
 # Folder targets.
@@ -291,28 +291,28 @@ build parsing_stuff: phony interpreter/parsers/libparsing_stuff.a
 #############################################
 # Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug
 
-build all: phony compiler/all interpreter/all
+build all: phony build/compiler/all build/interpreter/all
 
 # =============================================================================
 
 #############################################
-# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler
+# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler
 
-build compiler/all: phony compiler/COMPILER
-
-# =============================================================================
-
-#############################################
-# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter
-
-build interpreter/all: phony interpreter/INTERPRETER interpreter/parsers/all
+build build/compiler/all: phony build/compiler/COMPILER
 
 # =============================================================================
 
 #############################################
-# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter/parsers
+# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter
 
-build interpreter/parsers/all: phony interpreter/parsers/libparsing_stuff.a
+build build/interpreter/all: phony build/interpreter/INTERPRETER build/interpreter/parsers/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/parsers
+
+build build/interpreter/parsers/all: phony build/interpreter/parsers/libparsing_stuff.a
 
 # =============================================================================
 # Built-in targets

@@ -217,7 +217,7 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-COMPILER_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/compiler
+COMPILER_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/compiler
 
 //Value Computed by CMake
 COMPILER_IS_TOP_LEVEL:STATIC=OFF
@@ -226,7 +226,7 @@ COMPILER_IS_TOP_LEVEL:STATIC=OFF
 COMPILER_SOURCE_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/compiler
 
 //Value Computed by CMake
-INTERPRETER_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter
+INTERPRETER_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter
 
 //Value Computed by CMake
 INTERPRETER_IS_TOP_LEVEL:STATIC=OFF
@@ -253,7 +253,7 @@ boost_program_options_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_program_opt
 boost_regex_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.71.0
 
 //Value Computed by CMake
-parsing_stuff_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/interpreter/parsers
+parsing_stuff_BINARY_DIR:STATIC=/home/ortur/CLionProjects/my_little_programming_language/cmake-build-debug/build/interpreter/parsers
 
 //Value Computed by CMake
 parsing_stuff_IS_TOP_LEVEL:STATIC=OFF

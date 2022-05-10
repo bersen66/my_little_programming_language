@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-release/compiler/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-release/build/compiler/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-release/interpreter/cmake_install.cmake")
+  include("/home/ortur/CLionProjects/my_little_programming_language/cmake-build-release/build/interpreter/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
