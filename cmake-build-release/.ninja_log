@@ -1,7 +1,0 @@
-# ninja log v5
-1	1153	1651824459969351588	build/interpreter/parsers/CMakeFiles/parsing_stuff.dir/parsing_stuff.cpp.o	a70cfc12c2b5adc0
-1154	1165	1651824459985352066	build/interpreter/parsers/libparsing_stuff.a	e5d284af10cfe1ee
-1	3799	1651824462613431879	build/interpreter/CMakeFiles/INTERPRETER.dir/virtual_machine.cpp.o	8b01947dee9811e8
-1	6530	1651824465345516937	build/interpreter/CMakeFiles/INTERPRETER.dir/objects/object.cpp.o	46a4bf0cb0fd913a
-0	6813	1651824465629525902	build/interpreter/CMakeFiles/INTERPRETER.dir/main.cpp.o	53aee47f595a0234
-6813	6969	1651824465785530827	build/interpreter/INTERPRETER	838c18b5d454e22d

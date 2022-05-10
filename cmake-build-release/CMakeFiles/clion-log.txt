@@ -1,6 +1,0 @@
-/snap/clion/189/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/snap/clion/189/bin/ninja/linux/ninja -G Ninja -S /home/ortur/CLionProjects/my_little_programming_language -B /home/ortur/CLionProjects/my_little_programming_language/cmake-build-release
--- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0") found components: regex program_options 
--- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0") found components: program_options 
--- Configuring done
--- Generating done
--- Build files have been written to: /home/ortur/CLionProjects/my_little_programming_language/cmake-build-release
